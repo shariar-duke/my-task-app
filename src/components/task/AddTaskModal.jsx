@@ -1,4 +1,5 @@
-export default function AddTaskModal() {
+/* eslint-disable react/prop-types */
+export default function AddTaskModal({setShowModal}) {
   return (
     <div className="bg-black bg-opacity-70  fixed inset-0 flex items-center justify-center  text-white">
       <form className=" border-[#FEFBFB]/[36%] p-9 bg-[#191D26] rounded-md w-[600px]">
@@ -59,7 +60,7 @@ export default function AddTaskModal() {
           </div>
 
           <div className="flex justify-between">
-          <button className="rounded-md px-4 py-3 text-sm font-semibold bg-red-500">Close</button>
+          <button onClick={()=> setShowModal(false)} className="rounded-md px-4 py-3 text-sm font-semibold bg-red-500">Close</button>
           <button className="rounded-md px-4 py-3 text-sm font-semibold bg-blue-500">Submit</button>
           
           </div>
