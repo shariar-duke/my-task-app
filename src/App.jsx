@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
+import TaskBorad from "./components/task/TaskBorad";
 
 export default function App() {
   return (
@@ -7,6 +8,7 @@ export default function App() {
       <Header />
       <div className="container mx-auto  mt-[100px] ">
         <HeroSection />
+        <TaskBorad className="mt-5"/>
       </div>
     </div>
   );
