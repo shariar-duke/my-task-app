@@ -1,6 +1,7 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-export default function AddTaskModal({setShowModal}) {
+export default function AddTaskModal({onSave, setTasks}) {
     const [task, setTask] = useState({
         title:"",
         description:"",
@@ -26,6 +27,9 @@ export default function AddTaskModal({setShowModal}) {
     const handleSubmit =(e)=> 
     {
         e.preventDefault()
+        setTasks([... t,
+        task
+        ])
     }
   return (
     <div className="bg-black bg-opacity-70  fixed inset-0 flex items-center justify-center  text-white">
@@ -94,7 +98,7 @@ export default function AddTaskModal({setShowModal}) {
 
           <div className="flex justify-between">
           <button onClick={()=> setShowModal(false)} className="rounded-md px-4 py-3 text-sm font-semibold bg-red-500">Close</button>
-          <button type="submit" className="rounded-md px-4 py-3 text-sm font-semibold bg-blue-500">Submit</button>
+          <button onClick={()=>onSave(task)} type="submit" className="rounded-md px-4 py-3 text-sm font-semibold bg-blue-500">Submit</button>
           
           </div>
         </div>

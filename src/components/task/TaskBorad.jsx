@@ -20,17 +20,20 @@ export default function TaskBorad() {
   const [tasks, setTasks] = useState([defaultTask]);
 
   // function executing when the open button is clicked in TaskAction
-  const handleAddTask = () => {
-     setShowModal(true)
+  const handleAddTask = (task) => {
+    // setTasks(...tasks, task)
+    console.log("The task is", task)
+    setTasks([...tasks, task])
+    setShowModal(false)
   };
   return (
     <div>
       <SearchTask />
       <div className="mt-[25px] rounded-xl border-[rgba(206,206,206,0.12)] bg-[#1D212B] p-[30px]">
-        <TaskAction handleAddTask={handleAddTask} />
+        <TaskAction onAddClick ={()=> setShowModal(true)} />
         <TaskList tasks={tasks} />
 
-        {showModal && <AddTaskModal setShowModal={setShowModal} />}
+        {showModal && <AddTaskModal onSave ={handleAddTask} setShowModal={setShowModal} />}
       </div>
     </div>
   );
