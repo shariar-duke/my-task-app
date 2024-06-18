@@ -10,7 +10,7 @@ export default function TaskBorad() {
  const [show, setShow] = useState(false)
  const defaultTask = {
     'id':crypto.randomUUID(), // eta amk random Id dey 
-    'ititle': "Learn Reacat",
+    'title': "Learn Reacat",
     "description" : "I want to learn react as much as I can. Then  I will try to learn the other things ",
     "tags":["web", "react","js"],
     "priority":"High",
@@ -22,7 +22,7 @@ export default function TaskBorad() {
         <SearchTask/>
         <div className="mt-[25px] rounded-xl border-[rgba(206,206,206,0.12)] bg-[#1D212B] p-[30px]">
         <TaskAction/>
-        <TaskList/>
+        <TaskList tasks={tasks}/>
 
        
         </div>

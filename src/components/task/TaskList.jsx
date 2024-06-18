@@ -1,43 +1,77 @@
-import {FaStar} from "react-icons/fa"
-export default function TaskList() {
+/* eslint-disable react/prop-types */
+import { FaStar } from "react-icons/fa";
+export default function TaskList({ tasks }) {
   return (
     <div className="overflow-auto container mx-auto pb-[100px]">
-        <table className="table-fixed overflow-auto xl:w-full">
-            <thead>
-                <tr className="text-white">
-                    <th className="p-4 pb-8 text-sm font-semibold capitalize w-[48px]"></th>
-                    <th className="p-4 pb-8 text-sm font-semibold capitalize w-[300px]"> Title </th>
-                    <th className="p-4 pb-8 text-sm font-semibold capitalize w-full"> Description</th>
-                    <th className="p-4 pb-8 text-sm font-semibold capitalize w-[350px]"> Tags </th>
-                    <th className="p-4 pb-8 text-sm font-semibold capitalize w-[100px]"> Priority </th>
-                    <th className="p-4 pb-8 text-sm font-semibold capitalize w-[100px]"> Options </th>
-                </tr>
-            </thead>
-            <tbody>
-            <tr className="text-white border-b border-[#2E2443] [&>td]:text-center [&>td]:px-2  [&>td]:py-4">
-                    <td>
-                        <FaStar size={18} color="gray"/>
-                    </td>
-                    <td>A</td>
+      <table className="table-fixed overflow-auto xl:w-full">
+        <thead>
+          <tr className="text-white">
+            <th className="p-4 pb-8 text-sm font-semibold capitalize w-[48px]"></th>
+            <th className="p-4 pb-8 text-sm font-semibold capitalize w-[300px]">
+        
+              Title
+            </th>
+            <th className="p-4 pb-8 text-sm font-semibold capitalize w-full">
+             
+              Description
+            </th>
+            <th className="p-4 pb-8 text-sm font-semibold capitalize w-[350px]">
+            
+              Tags
+            </th>
+            <th className="p-4 pb-8 text-sm font-semibold capitalize w-[100px]">
+              
+              Priority
+            </th>
+            <th className="p-4 pb-8 text-sm font-semibold capitalize w-[100px]">
+             
+              Options
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {tasks &&
+            tasks.length > 0 &&
+            tasks.map((task, index) => (
+              <tr
+                key={index}
+                className="text-white border-b border-[#2E2443] [&>td]:text-center [&>td]:px-2  [&>td]:py-4"
+              >
+                <td>
+                    {
+                        task.isFavourite ?     <FaStar size={18} color="yellow" /> :     <FaStar size={18} color="gray" />
+                    }
+              
+                </td>
+                <td>{task.title}</td>
 
-                    <td>A</td>
-                    <td>A</td>
-                    <td>A</td>
-                    <td>A</td>
-                </tr>
-                <tr className="text-white border-b border-[#2E2443] [&>td]:text-center [&>td]:px-2  [&>td]:py-4">
-                    <td>
-                        <FaStar size={18} color="gray"/>
-                    </td>
-                    <td>B</td>
+                <td>{task.description}</td>
+                <td>
 
-                    <td>B</td>
-                    <td>B</td>
-                    <td>B</td>
-                    <td>B</td>
-                </tr>
-            </tbody>
-        </table>
+                    <ul className="flex gap-1.5 justify-center flex-wrap">
+                    {
+                        task.tags.map((t,v)=> 
+                        <li key={v}>
+                            <span className="inline-block h-6 whitespace-nowrap rounded-[45px] bg-green-500 px-2.5 text-sm capitilize text-white">
+                                {t}
+                            </span>
+                        </li>
+                        )
+                    }
+                    </ul>
+                  
+                </td>
+                <td>{task.priority}</td>
+                <td>
+                    <div className="flex items-center justify-center space-x-3">
+                        <button className="text-red-500">Delete</button>
+                        <button className="text-blue-500">Edit</button>
+                    </div>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
     </div>
-  )
+  );
 }
