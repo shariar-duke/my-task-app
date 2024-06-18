@@ -1,9 +1,13 @@
 import Header from "./components/Header";
+import HeroSection from "./components/HeroSection";
 
 export default function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-     <Header/>
-    </h1>
-  )
+    <div className="flex flex-col bg-[#191D26] h-[100vh]">
+      <Header />
+      <div className="container mx-auto  mt-[100px] ">
+        <HeroSection />
+      </div>
+    </div>
+  );
 }
