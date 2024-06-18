@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-export default function AddTaskModal({onSave, setTasks}) {
+export default function AddTaskModal({onSave, setTasks , closeModal}) {
     const [task, setTask] = useState({
         title:"",
         description:"",
@@ -97,7 +97,7 @@ export default function AddTaskModal({onSave, setTasks}) {
           </div>
 
           <div className="flex justify-between">
-          <button onClick={()=> setShowModal(false)} className="rounded-md px-4 py-3 text-sm font-semibold bg-red-500">Close</button>
+          <button onClick={closeModal} className="rounded-md px-4 py-3 text-sm font-semibold bg-red-500">Close</button>
           <button onClick={()=>onSave(task)} type="submit" className="rounded-md px-4 py-3 text-sm font-semibold bg-blue-500">Submit</button>
           
           </div>

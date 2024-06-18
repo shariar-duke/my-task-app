@@ -33,7 +33,7 @@ export default function TaskBorad() {
         <TaskAction onAddClick ={()=> setShowModal(true)} />
         <TaskList tasks={tasks} />
 
-        {showModal && <AddTaskModal onSave ={handleAddTask} setShowModal={setShowModal} />}
+        {showModal && <AddTaskModal onSave ={handleAddTask} closeModal={()=>setShowModal(false)} />}
       </div>
     </div>
   );
