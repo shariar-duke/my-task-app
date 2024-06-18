@@ -4,7 +4,7 @@ import TaskBorad from "./components/task/TaskBorad";
 
 export default function App() {
   return (
-    <div className="flex flex-col bg-[#191D26] h-[100vh]">
+    <div className="flex flex-col  h-[100%] pb-[70px]">
       <Header />
       <div className="container mx-auto  mt-[100px] ">
         <HeroSection />
