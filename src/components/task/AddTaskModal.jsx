@@ -1,8 +1,35 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 export default function AddTaskModal({setShowModal}) {
+    const [task, setTask] = useState({
+        title:"",
+        description:"",
+        tags:[],
+        priority:"",
+        isFavourite:false,
+    })
+
+    const handleChange =(e) => 
+    {
+        console.log(e.target.name)
+        const name = e.target.name;
+        let value = e.target.value;
+        if(name === "tags")
+        {
+            value = value.split(" ")
+        }
+        setTask({...task,
+        [name]:value
+        })
+    }
+
+    const handleSubmit =(e)=> 
+    {
+        e.preventDefault()
+    }
   return (
     <div className="bg-black bg-opacity-70  fixed inset-0 flex items-center justify-center  text-white">
-      <form className=" border-[#FEFBFB]/[36%] p-9 bg-[#191D26] rounded-md w-[600px]">
+      <form onSubmit={handleSubmit} className=" border-[#FEFBFB]/[36%] p-9 bg-[#191D26] rounded-md w-[600px]">
         <h2 className="mb-9 text-center text-2xl font-bold text-white lg:text-[28px]">
           Add New Task
         </h2>
@@ -14,6 +41,8 @@ export default function AddTaskModal({setShowModal}) {
               className="w-full rounded-md block bg-[#28323F] px-3 py-2.5"
               name="title"
               id="title"
+              value={task.title}
+              onChange={handleChange}
               required
             />
           </div>
@@ -26,6 +55,8 @@ export default function AddTaskModal({setShowModal}) {
               id="description"
               cols={20}
               rows={4}
+              value={task.description}
+              onChange={handleChange}
               required
             />
           </div>
@@ -37,12 +68,14 @@ export default function AddTaskModal({setShowModal}) {
               className="w-full rounded-md block bg-[#28323F] px-3 py-2.5"
               name="tags"
               id="tags"
+              value={task.tags}
+              onChange={handleChange}
               required
             />
           </div>
           <div className="space-y-2 lg:space-y-3">
             <label htmlFor="priority">Priority </label> <br/>
-            <select name="priority" id="priority" className="bg-[#28323F] px-3 py-2.5 pr-[12px] rounded-md">
+            <select onChange={handleChange} value={task.priority} name="priority" id="priority" className="bg-[#28323F] px-3 py-2.5 pr-[12px] rounded-md">
                 <option value="" selected>
                     Select Priority
                 </option>
@@ -61,7 +94,7 @@ export default function AddTaskModal({setShowModal}) {
 
           <div className="flex justify-between">
           <button onClick={()=> setShowModal(false)} className="rounded-md px-4 py-3 text-sm font-semibold bg-red-500">Close</button>
-          <button className="rounded-md px-4 py-3 text-sm font-semibold bg-blue-500">Submit</button>
+          <button type="submit" className="rounded-md px-4 py-3 text-sm font-semibold bg-blue-500">Submit</button>
           
           </div>
         </div>
