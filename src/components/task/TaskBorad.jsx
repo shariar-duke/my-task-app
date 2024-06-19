@@ -4,6 +4,7 @@ import SearchTask from "./SearchTask";
 import TaskAction from "./TaskAction";
 import TaskList from "./TaskList";
 import AddTaskModal from "./AddTaskModal";
+import NoTaskFound from "./NoTaskFound";
 
 export default function TaskBorad() {
   const [show, setShow] = useState(true);
@@ -46,12 +47,21 @@ export default function TaskBorad() {
     console.log("The task I have selected is", task);
   };
 
+  const handleDeleteTask =(task) => 
+  {
+   const newTasks = tasks.filter(t=> t.id !==task.id)
+   setTasks(newTasks)
+  }
+
   return (
     <div>
       <SearchTask />
       <div className="mt-[25px] rounded-xl border-[rgba(206,206,206,0.12)] bg-[#1D212B] p-[30px]">
         <TaskAction onAddClick={() => setShowModal(true)} />
-        <TaskList tasks={tasks} onEdit={handleEditTask} />
+        {
+            tasks.length > 0 ?      <TaskList tasks={tasks} onEdit={handleEditTask} onDelete ={handleDeleteTask} /> : <NoTaskFound/>
+        }
+   
 
         {showModal && (
           <AddTaskModal

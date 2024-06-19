@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import { FaStar } from "react-icons/fa";
-export default function TaskList({ tasks, onEdit }) {
+export default function TaskList({ tasks, onEdit , onDelete}) {
   return (
     <div className="overflow-auto container mx-auto pb-[100px]">
+     
       <table className="table-fixed overflow-auto xl:w-full">
         <thead>
           <tr className="text-white">
@@ -26,6 +27,7 @@ export default function TaskList({ tasks, onEdit }) {
         </thead>
         <tbody>
           {
+            
             tasks?.map((task, index) => (
               <tr
                 key={index}
@@ -53,7 +55,7 @@ export default function TaskList({ tasks, onEdit }) {
                 <td>{task?.priority}</td>
                 <td>
                   <div className="flex items-center justify-center space-x-3">
-                    <button className="text-red-500">Delete</button>
+                    <button onClick={()=>onDelete(task)} className="text-red-500">Delete</button>
                     <button
                       onClick={() => onEdit(task)}
                       className="text-blue-500"
