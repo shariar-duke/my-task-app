@@ -47,21 +47,35 @@ export default function TaskBorad() {
     console.log("The task I have selected is", task);
   };
 
-  const handleDeleteTask =(task) => 
+  const handleDeleteTask = (task) => {
+    const newTasks = tasks.filter((t) => t.id !== task.id);
+    setTasks(newTasks);
+  };
+
+  // Delete All Task 
+  const handleDeleteAllTask=()=> 
   {
-   const newTasks = tasks.filter(t=> t.id !==task.id)
-   setTasks(newTasks)
+    
+    setTasks([])
+    console.log("I want to delete all tasks")
   }
 
   return (
     <div>
       <SearchTask />
       <div className="mt-[25px] rounded-xl border-[rgba(206,206,206,0.12)] bg-[#1D212B] p-[30px]">
-        <TaskAction onAddClick={() => setShowModal(true)} />
-        {
-            tasks.length > 0 ?      <TaskList tasks={tasks} onEdit={handleEditTask} onDelete ={handleDeleteTask} /> : <NoTaskFound/>
-        }
-   
+        <TaskAction 
+        onDeleteAllClick ={handleDeleteAllTask}
+        onAddClick={() => setShowModal(true)} />
+        {tasks.length > 0 ? (
+          <TaskList
+            tasks={tasks}
+            onEdit={handleEditTask}
+            onDelete={handleDeleteTask}
+          />
+        ) : (
+          <NoTaskFound />
+        )}
 
         {showModal && (
           <AddTaskModal
