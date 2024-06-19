@@ -18,22 +18,48 @@ export default function TaskBorad() {
     isFavourite: true,
   };
   const [tasks, setTasks] = useState([defaultTask]);
+  const [taskToUpdate, setTaskToUpdate] = useState(null); // eta holo task update er jnnoe
 
   // function executing when the open button is clicked in TaskAction
-  const handleAddTask = (task) => {
-    // setTasks(...tasks, task)
-    console.log("The task is", task)
-    setTasks([...tasks, task])
-    setShowModal(false)
+  const handleAddTask = (newTask, isAdd) => {
+    if (isAdd) {
+      setTasks([...tasks, newTask]);
+    } else {
+      setTasks(
+        tasks.map((task) => {
+          if (task.id === newTask.id) {
+            return newTask;
+          }
+          return task;
+        })
+      );
+    }
+    setTaskToUpdate(null);
+    setShowModal(false);
   };
+
+  // for edit the task
+
+  const handleEditTask = (task) => {
+    setTaskToUpdate(task);
+    setShowModal(true);
+    console.log("The task I have selected is", task);
+  };
+
   return (
     <div>
       <SearchTask />
       <div className="mt-[25px] rounded-xl border-[rgba(206,206,206,0.12)] bg-[#1D212B] p-[30px]">
-        <TaskAction onAddClick ={()=> setShowModal(true)} />
-        <TaskList tasks={tasks} />
+        <TaskAction onAddClick={() => setShowModal(true)} />
+        <TaskList tasks={tasks} onEdit={handleEditTask} />
 
-        {showModal && <AddTaskModal onSave ={handleAddTask} closeModal={()=>setShowModal(false)} />}
+        {showModal && (
+          <AddTaskModal
+            taskToUpdate={taskToUpdate}
+            onSave={handleAddTask}
+            closeModal={() => setShowModal(false)}
+          />
+        )}
       </div>
     </div>
   );

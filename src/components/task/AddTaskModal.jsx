@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-export default function AddTaskModal({onSave, setTasks , closeModal}) {
-    const [task, setTask] = useState({
+export default function AddTaskModal({onSave,  closeModal , taskToUpdate}) {
+    const [task, setTask] = useState(taskToUpdate ||{
         id: crypto.randomUUID(),
         title:"",
         description:"",
@@ -11,6 +12,8 @@ export default function AddTaskModal({onSave, setTasks , closeModal}) {
         isFavourite:false,
     })
 
+    const [isAdd, setIsAdd] = useState(Object.is(taskToUpdate, null))
+    // const [isAdd, setIsAdd] = useState(Objec.is(taskToUpdate, null))
     const handleChange =(e) => 
     {
         console.log(e.target.name)
@@ -25,18 +28,12 @@ export default function AddTaskModal({onSave, setTasks , closeModal}) {
         })
     }
 
-    const handleSubmit =(e)=> 
-    {
-        e.preventDefault()
-        setTasks([... t,
-        task
-        ])
-    }
+  
   return (
     <div className="bg-black bg-opacity-70  fixed inset-0 flex items-center justify-center  text-white">
-      <form onSubmit={handleSubmit} className=" border-[#FEFBFB]/[36%] p-9 bg-[#191D26] rounded-md w-[600px]">
+      <form  className=" border-[#FEFBFB]/[36%] p-9 bg-[#191D26] rounded-md w-[600px]">
         <h2 className="mb-9 text-center text-2xl font-bold text-white lg:text-[28px]">
-          Add New Task
+        {isAdd ? "Add New Task " : "Edit Task"}  
         </h2>
         <div className="space-y-9 text-white lg:space-y-10">
           <div className="space-y-2 lg:space-y-3">
@@ -99,7 +96,7 @@ export default function AddTaskModal({onSave, setTasks , closeModal}) {
 
           <div className="flex justify-between">
           <button onClick={closeModal} className="rounded-md px-4 py-3 text-sm font-semibold bg-red-500">Close</button>
-          <button onClick={()=>onSave(task)} type="submit" className="rounded-md px-4 py-3 text-sm font-semibold bg-blue-500">Submit</button>
+          <button onClick={()=>onSave(task, isAdd)} type="submit" className="rounded-md px-4 py-3 text-sm font-semibold bg-blue-500">Submit</button>
           
           </div>
         </div>
